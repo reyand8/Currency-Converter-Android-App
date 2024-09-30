@@ -1,6 +1,6 @@
 package com.example.currency_converter_android_app;
 
-import com.example.currency_converter_android_app.models.CodesModel;
+import com.example.currency_converter_android_app.models.CodeModel;
 import com.example.currency_converter_android_app.models.CurrencyModel;
 
 import retrofit2.Call;
@@ -17,5 +17,5 @@ public interface CurrenciesApi {
     );
 
     @GET("codes")
-    Call<CodesModel> getCodes();
+    Call<CodeModel> getCodes();
 }
