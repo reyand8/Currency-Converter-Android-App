@@ -2,4 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="colorMainHint">#C2BCBC</color>
+
+    <color name="mainBg">#1e192d</color>
+    <color name="mainCard">#56595072</color>
+
+    <color name="popupMenuBg">#F6F0F0</color>
+
 </resources>
