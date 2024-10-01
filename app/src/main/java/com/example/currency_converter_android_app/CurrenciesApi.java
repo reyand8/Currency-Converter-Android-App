@@ -9,7 +9,7 @@ import retrofit2.http.Path;
 
 public interface CurrenciesApi {
 
-    @GET("/pair/{from}/{to}/{amount}")
+    @GET("pair/{from}/{to}/{amount}")
     Call<CurrencyModel> getPair(
             @Path("from") String fromCurrency,
             @Path("to") String toCurrency,
