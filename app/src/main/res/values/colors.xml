@@ -5,8 +5,12 @@
     <color name="colorMainHint">#C2BCBC</color>
 
     <color name="mainBg">#1e192d</color>
+    <color name="mainBaseBg">#AE6045A5</color>
     <color name="mainCard">#56595072</color>
 
-    <color name="popupMenuBg">#F6F0F0</color>
+    <color name="popupMenuBg">#4C3684</color>
+    <color name="selectCurrBg">#6045A5</color>
+    <color name="spinnerBg">#B9ADD0</color>
+
 
 </resources>
