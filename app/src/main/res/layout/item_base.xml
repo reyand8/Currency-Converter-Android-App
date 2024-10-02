@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/itemBase"
+    android:orientation="horizontal"
+    android:layout_width="380dp"
+    android:layout_height="68dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:gravity="center"
+    android:background="@drawable/item_base_background">
+
+    <TextView
+        android:id="@+id/rateCodeBase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="USD"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:textColor="@color/white"
+        android:minHeight="64dp"
+        android:gravity="center_vertical"
+        />
+    <TextView
+        android:id="@+id/rateFullNameBase"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="American dollar"
+        android:layout_marginStart="9dp"
+        android:textSize="12sp"
+        android:textColor="@color/colorMainHint"/>
+    <TextView
+        android:id="@+id/rateRateBase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_weight="2.5"
+        android:text="1.00"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"/>
+
+</LinearLayout>
