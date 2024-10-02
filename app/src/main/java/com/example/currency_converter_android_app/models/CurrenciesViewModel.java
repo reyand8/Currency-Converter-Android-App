@@ -19,6 +19,7 @@ import java.util.List;
 public class CurrenciesViewModel extends ViewModel {
 
     private MutableLiveData<CurrencyModel> currencyLiveData;
+    private MutableLiveData<LatestRatesModel> currencyLatestLiveData;
     private MutableLiveData<ArrayList<ArrayList<String>>> currencyCodesLiveData;
 
     private MutableLiveData<String> flagUrlFromLiveData;
@@ -29,6 +30,7 @@ public class CurrenciesViewModel extends ViewModel {
 
     public CurrenciesViewModel() {
         currencyLiveData = new MutableLiveData<>();
+        currencyLatestLiveData = new MutableLiveData<>();
         currencyCodesLiveData = new MutableLiveData<>();
 
         flagUrlFromLiveData = new MutableLiveData<>();
@@ -58,6 +60,27 @@ public class CurrenciesViewModel extends ViewModel {
         });
     }
 
+    public void fetchCurrencyLatest(String mainCurrency) {
+        Call<LatestRatesModel> call = currenciesApi.getLatest(mainCurrency);
+        call.enqueue(new Callback<LatestRatesModel>() {
+            @Override
+            public void onResponse(Call<LatestRatesModel> call, Response<LatestRatesModel> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    LatestRatesModel latestRatesModel = response.body();
+                    currencyLatestLiveData.setValue(latestRatesModel);
+                } else {
+                    Log.e("Error: ", response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LatestRatesModel> call, Throwable t) {
+                currencyLatestLiveData.setValue(null);
+                Log.e("Error: ", t.getMessage());
+            }
+        });
+    }
+
     public void fetchCurrencyCodes() {
         Call<CodeModel> call = currenciesApi.getCodes();
         call.enqueue(new Callback<CodeModel>() {
@@ -67,7 +90,7 @@ public class CurrenciesViewModel extends ViewModel {
                     ArrayList<ArrayList<String>> codesList = response.body().getSupportedCodes();
                     currencyCodesLiveData.setValue(codesList);
                 } else {
-                    Log.e("Error: ", "Response: " + response.message());
+                    Log.e("Error: ", response.message());
                 }
             }
             @Override
@@ -117,10 +140,13 @@ public class CurrenciesViewModel extends ViewModel {
         return currencyLiveData;
     }
 
+    public MutableLiveData<LatestRatesModel> getCurrencyLatestLiveData() {
+        return currencyLatestLiveData;
+    }
+
     public MutableLiveData<ArrayList<ArrayList<String>>> getCurrencyCodesLiveData() {
         return currencyCodesLiveData;
     }
-
 
     public MutableLiveData<String> getFlagUrlFromLiveData() {
         return flagUrlFromLiveData;
