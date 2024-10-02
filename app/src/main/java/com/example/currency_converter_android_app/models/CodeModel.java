@@ -1,12 +1,21 @@
 package com.example.currency_converter_android_app.models;
 
+import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
 public class CodeModel {
+
+    @SerializedName("result")
     private String result;
+
+    @SerializedName("documentation")
     private String documentation;
-    private String terms_of_use;
-    private ArrayList<ArrayList<String>> supported_codes;
+
+    @SerializedName("terms_of_use")
+    private String termsOfUse;
+
+    @SerializedName("supported_codes")
+    private ArrayList<ArrayList<String>> supportedCodes;
 
     public String getResult() {
         return result;
@@ -17,10 +26,10 @@ public class CodeModel {
     }
 
     public String getTermsOfUse() {
-        return terms_of_use;
+        return termsOfUse;
     }
 
     public ArrayList<ArrayList<String>> getSupportedCodes() {
-        return supported_codes;
+        return supportedCodes;
     }
 }

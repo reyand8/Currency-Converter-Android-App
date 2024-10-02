@@ -1,18 +1,24 @@
 package com.example.currency_converter_android_app.models;
 
 
+import com.google.gson.annotations.SerializedName;
+
 public class CurrencyModel {
-        public String result;
-        public String documentation;
-        public String terms_of_use;
-        public int time_last_update_unix;
-        public String time_last_update_utc;
-        public int time_next_update_unix;
-        public String time_next_update_utc;
-        public String base_code;
-        public String target_code;
-        public double conversion_rate;
-        public double conversion_result;
+
+    @SerializedName("result")
+    private String result;
+    @SerializedName("documentation")
+    private String documentation;
+    @SerializedName("time_last_update_utc")
+    private String timeLastUpdateUtc;
+    @SerializedName("base_code")
+    private String baseCode;
+    @SerializedName("target_code")
+    private String targetCode;
+    @SerializedName("conversion_rate")
+    private double conversionRate;
+    @SerializedName("conversion_result")
+    private double conversionResult;
 
     public String getResult() {
         return result;
@@ -22,39 +28,23 @@ public class CurrencyModel {
         return documentation;
     }
 
-    public String getTermsOfUse() {
-        return terms_of_use;
-    }
-
-    public int getTimeLastUpdateUnix() {
-        return time_last_update_unix;
-    }
-
     public String getTimeLastUpdateUtc() {
-        return time_last_update_utc;
-    }
-
-    public int getTimeNextUpdateUnix() {
-        return time_next_update_unix;
-    }
-
-    public String getTimeNextUpdateUtc() {
-        return time_next_update_utc;
+        return timeLastUpdateUtc;
     }
 
     public String getBaseCode() {
-        return base_code;
+        return baseCode;
     }
 
     public String getTargetCode() {
-        return target_code;
+        return targetCode;
     }
 
     public double getConversionRate() {
-        return conversion_rate;
+        return conversionRate;
     }
 
     public double getConversionResult() {
-        return conversion_result;
+        return conversionResult;
     }
 }
