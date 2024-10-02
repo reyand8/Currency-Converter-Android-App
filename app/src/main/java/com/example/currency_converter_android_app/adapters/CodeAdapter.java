@@ -4,8 +4,10 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.currency_converter_android_app.R;
 import com.example.currency_converter_android_app.databinding.ItemCodeBinding;
 
 import java.util.List;
@@ -49,6 +51,8 @@ public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.CurrencyViewHo
 
         public void bind(String currency) {
             binding.tvCode.setText(currency);
+            int color = ContextCompat.getColor(itemView.getContext(), R.color.white);
+            binding.tvCode.setTextColor(color);
             itemView.setOnClickListener(v -> listener.onCurrencyClick(currency));
         }
     }
