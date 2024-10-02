@@ -6,11 +6,13 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +41,6 @@ public class MainFragment extends Fragment {
     private CurrenciesViewModel currenciesViewModel;
     private ArrayList<ArrayList<String>> currencyCodes;
 
-
     private String currencyFrom;
     private String currencyTo;
 
@@ -54,6 +55,9 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentMainBinding.inflate(inflater, container, false);
+        currencyFrom = "EUR";
+        currencyTo = "USD";
+
         binding.mainResult.setText("");
         binding.mainLastUpd.setText("");
         return binding.getRoot();
@@ -62,6 +66,11 @@ public class MainFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        RatesFragment childFragment = new RatesFragment();
+        transaction.replace(R.id.childFragment, childFragment);
+        transaction.commit();
 
         currenciesViewModel.getCurrencyCodesLiveData().observe(getViewLifecycleOwner(), codes -> {
             if (codes != null && !codes.isEmpty()) {
@@ -192,7 +201,7 @@ public class MainFragment extends Fragment {
             });
 
             recyclerView.setAdapter(adapter);
-            popupWindow.showAsDropDown(imageView, 0, 0);
+            popupWindow.showAtLocation(imageView.getRootView(), Gravity.CENTER, 0, 0);
         });
     }
 
