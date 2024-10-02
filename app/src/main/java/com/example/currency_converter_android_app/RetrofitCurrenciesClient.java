@@ -5,16 +5,34 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class RetrofitCurrenciesClient {
-    private static Retrofit retrofit;
-    private static final String API_KEY = "YOUR_KEY";
+    private static Retrofit currenciesRetrofit;
+    private static Retrofit flagsRetrofit;
 
-    private static final String BASE_URL =
-            "https://v6.exchangerate-api.com/v6/" + API_KEY;
-    public static Retrofit getRetrofitInstance() {
-        retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        return retrofit;
+    private static final String CURRENCY_API_KEY = "YOUR KEY/";
+
+    private static final String CURRENCY_BASE_URL =
+            "https://v6.exchangerate-api.com/v6/" + CURRENCY_API_KEY;
+
+    private static final String FLAG_BASE_URL = "https://restcountries.com/v3.1/";
+
+
+    public static Retrofit getCurrenciesRetrofitInstance() {
+        if (currenciesRetrofit == null) {
+            currenciesRetrofit = new Retrofit.Builder()
+                    .baseUrl(CURRENCY_BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        return currenciesRetrofit;
+    }
+
+    public static Retrofit getFlagsRetrofitInstance() {
+        if (flagsRetrofit == null) {
+            flagsRetrofit = new Retrofit.Builder()
+                    .baseUrl(FLAG_BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        return flagsRetrofit;
     }
 }
