@@ -43,7 +43,7 @@
     <Button
         android:id="@+id/rateRemove"
         android:layout_width="69dp"
-        android:layout_height="38dp"
+        android:layout_height="34dp"
         android:text="Remove"
         android:textColor="@color/white"
         android:textSize="12sp"
