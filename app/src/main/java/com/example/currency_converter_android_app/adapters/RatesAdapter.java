@@ -13,6 +13,7 @@ import com.example.currency_converter_android_app.R;
 import com.example.currency_converter_android_app.models.RateModel;
 
 import java.util.List;
+import java.util.Locale;
 
 
 public class RatesAdapter extends RecyclerView.Adapter<RatesAdapter.RateViewHolder> {
@@ -36,9 +37,10 @@ public class RatesAdapter extends RecyclerView.Adapter<RatesAdapter.RateViewHold
     @Override
     public void onBindViewHolder(@NonNull RateViewHolder holder, int position) {
         RateModel rate = rates.get(position);
+        String formattedRate = String.format(Locale.US, "%.2f", rate.getRate());
         holder.rateCode.setText(rate.getCode());
         holder.rateFullName.setText(rate.getFullName());
-        holder.rateRate.setText(String.valueOf(rate.getRate()));
+        holder.rateRate.setText(formattedRate);
 
         holder.removeButton.setOnClickListener(v -> {
             String currencyCode = rate.getCode();
