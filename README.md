@@ -15,4 +15,4 @@ _________________________
 _________________________
 _________________________
 
-<img src="readmeSrc/scr_gif_two.png" alt="scr_gif_two" width="318" height="702" />
+<img src="readmeSrc/scr_gif_two.gif" alt="scr_gif_two" width="318" height="702" />
