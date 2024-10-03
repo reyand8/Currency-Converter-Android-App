@@ -3,6 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="colorMainHint">#C2BCBC</color>
+    <color name="mainBtn">#AE6045A5</color>
 
     <color name="mainBg">#1e192d</color>
     <color name="mainBaseBg">#AE6045A5</color>
