@@ -45,7 +45,8 @@ public class RatesFragment extends Fragment {
 
     private String currencyMain;
 
-    private final List<String> baseCurrencies = new ArrayList<>(Arrays.asList("UAH", "USD", "PLN"));
+    private final List<String> baseCurrencies =
+            new ArrayList<>(Arrays.asList("UAH", "USD", "PLN"));
 
 
     @Override
@@ -156,7 +157,8 @@ public class RatesFragment extends Fragment {
 
     private void fetchCurrencyRates() {
         currenciesViewModel.fetchCurrencyLatest(currencyMain);
-        currenciesViewModel.getCurrencyLatestLiveData().observe(getViewLifecycleOwner(), latestRatesModel -> {
+        currenciesViewModel.getCurrencyLatestLiveData()
+                .observe(getViewLifecycleOwner(), latestRatesModel -> {
             if (latestRatesModel != null) {
                 Map<String, Double> rates = latestRatesModel.getConversionRates();
                 List<RateModel> filteredRates = new ArrayList<>();
@@ -173,7 +175,7 @@ public class RatesFragment extends Fragment {
                 ratesAdapter = new RatesAdapter(filteredRates, baseCurrencies);
                 binding.recyclerView.setAdapter(ratesAdapter);
             } else {
-                Log.e("RatesFragment", "Error");
+                Log.e("CurrencyRates", "Error");
             }
         });
     }

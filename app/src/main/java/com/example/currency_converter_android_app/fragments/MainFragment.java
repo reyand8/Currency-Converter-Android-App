@@ -116,15 +116,17 @@ public class MainFragment extends Fragment {
                 binding.mainResult.setText(formattedResult + " " +  currencyTo);
                 binding.mainLastUpd.setText("Last update: " + formattedDate);
             } else {
-                Log.e("getCurrencyLiveData", "Error");
+                Log.e("CurrencyConvert", "Error");
             }
         });
     }
 
     public String formatDate(String inputDate) {
         String outputDate = "";
-        SimpleDateFormat inputFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.ENGLISH);
-        SimpleDateFormat outputFormat = new SimpleDateFormat("EEE, dd MMM yyyy", Locale.ENGLISH);
+        SimpleDateFormat inputFormat =
+                new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.ENGLISH);
+        SimpleDateFormat outputFormat =
+                new SimpleDateFormat("EEE, dd MMM yyyy", Locale.ENGLISH);
         try {
             Date date = inputFormat.parse(inputDate);
             outputDate = outputFormat.format(date);
@@ -168,13 +170,14 @@ public class MainFragment extends Fragment {
                         return;
                     }
                     currenciesViewModel.fetchFlagByCurrencyCode("from", currencyFrom);
-                    currenciesViewModel.getFlagUrlFromLiveData().observe(getViewLifecycleOwner(), result -> {
+                    currenciesViewModel.getFlagUrlFromLiveData()
+                            .observe(getViewLifecycleOwner(), result -> {
                         if (result != null && !result.isEmpty() ) {
                             Picasso.get()
                                     .load(result)
                                     .into(binding.mainFrom);
                         } else {
-                            Log.e("getFlagUrlFromLiveData", "Error");
+                            Log.e("CurrencyFlags", "Error");
                         }
                     });
                 } else {
@@ -187,13 +190,14 @@ public class MainFragment extends Fragment {
                         return;
                     }
                     currenciesViewModel.fetchFlagByCurrencyCode("to", currencyTo);
-                    currenciesViewModel.getFlagUrlToLiveData().observe(getViewLifecycleOwner(), result -> {
+                    currenciesViewModel.getFlagUrlToLiveData()
+                            .observe(getViewLifecycleOwner(), result -> {
                         if (result != null && !result.isEmpty() ) {
                             Picasso.get()
                                     .load(result)
                                     .into(binding.mainTo);
                         } else {
-                            Log.e("getFlagUrlToLiveData", "Error");
+                            Log.e("CurrencyFlags", "Error");
                         }
                     });
                 }
