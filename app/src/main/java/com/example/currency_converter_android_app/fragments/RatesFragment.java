@@ -42,12 +42,9 @@ public class RatesFragment extends Fragment {
     private ArrayList<ArrayList<String>> currencyCodes;
     private RatesAdapter ratesAdapter;
     private List<String> ratesList = new ArrayList<>();
-
     private String currencyMain;
-
     private final List<String> baseCurrencies =
             new ArrayList<>(Arrays.asList("UAH", "USD", "PLN"));
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,6 +67,15 @@ public class RatesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        getCurrencyCodes();
+        selectCurrency();
+        getRatesBtn();
+
+        LinearLayout itemRate = binding.itemAdd.itemRate;
+        itemRate.setOnClickListener(v -> showCurrencyPopup(v));
+    }
+
+    private void getCurrencyCodes() {
         currenciesViewModel.getCurrencyCodesLiveData().observe(getViewLifecycleOwner(), codes -> {
             if (codes != null && !codes.isEmpty()) {
                 currencyCodes = codes;
@@ -88,30 +94,28 @@ public class RatesFragment extends Fragment {
 
                 fetchCurrencyRates();
             } else {
-                Log.e("CurrencyCodes", "Error");
+                Log.e("CurrencyCodes", "Currency codes error");
             }
         });
+    }
 
+    private void selectCurrency() {
         binding.selectCurr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedCurrency = parent.getItemAtPosition(position).toString();
                 currencyMain = selectedCurrency.split(" - ")[0];
             }
-
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-
+            public void onNothingSelected(AdapterView<?> adapterView) {}
         });
+    }
 
+    private void getRatesBtn() {
         binding.btnGetRates.setOnClickListener(v -> {
             fetchCurrencyRates();
             updateCodes("Base");
         });
-
-        LinearLayout itemRate = binding.itemAdd.itemRate;
-        itemRate.setOnClickListener(v -> showCurrencyPopup(v));
     }
 
     private void showCurrencyPopup(View anchor) {
@@ -127,12 +131,7 @@ public class RatesFragment extends Fragment {
         RecyclerView recyclerView = popupView.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        List<String> currencyList = new ArrayList<>();
-        for (List<String> code : currencyCodes) {
-            String currencyCode = code.get(0);
-            String currencyName = code.get(1);
-            currencyList.add(currencyCode + " - " + currencyName);
-        }
+        List<String> currencyList = getCurrencyList();
 
         CodeAdapter adapter = new CodeAdapter(currencyList, selectedCurrency -> {
             currencyMain = selectedCurrency.split(" - ")[0];
@@ -155,6 +154,17 @@ public class RatesFragment extends Fragment {
         }
     }
 
+    private List<String> getCurrencyList() {
+        List<String> currencyList = new ArrayList<>();
+        currencyList.add("EUR - Euro");
+        for (List<String> code : currencyCodes) {
+            String currencyCode = code.get(0);
+            String currencyName = code.get(1);
+            currencyList.add(currencyCode + " - " + currencyName);
+        }
+        return currencyList;
+    }
+
     private void fetchCurrencyRates() {
         currenciesViewModel.fetchCurrencyLatest(currencyMain);
         currenciesViewModel.getCurrencyLatestLiveData()
@@ -175,7 +185,7 @@ public class RatesFragment extends Fragment {
                 ratesAdapter = new RatesAdapter(filteredRates, baseCurrencies);
                 binding.recyclerView.setAdapter(ratesAdapter);
             } else {
-                Log.e("CurrencyRates", "Error");
+                Log.e("CurrencyRates", "Currency rates error");
             }
         });
     }
