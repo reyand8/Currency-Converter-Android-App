@@ -2,6 +2,10 @@
 
 Java, Retrofit, MVVM, Picasso, Exchangerate API, Flags API
 
+
+**NOTE:** Add your API KEY to the `RetrofitCurrenciesClient` file.
+
+
 _________________________
 _________________________
 
