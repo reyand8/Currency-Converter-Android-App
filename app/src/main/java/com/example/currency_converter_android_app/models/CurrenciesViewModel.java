@@ -49,13 +49,13 @@ public class CurrenciesViewModel extends ViewModel {
                     CurrencyModel currencyModel = response.body();
                     currencyLiveData.setValue(currencyModel);
                 } else {
-                    Log.e("Error: ", "Response: " + response.message());
+                    Log.e("Response error: ", response.message());
                 }
             }
             @Override
             public void onFailure(Call<CurrencyModel> call, Throwable t) {
                 currencyLiveData.setValue(null);
-                Log.e("Error: ", t.getMessage());
+                Log.e("Failure: ", t.getMessage());
             }
         });
     }
@@ -69,14 +69,14 @@ public class CurrenciesViewModel extends ViewModel {
                     LatestRatesModel latestRatesModel = response.body();
                     currencyLatestLiveData.setValue(latestRatesModel);
                 } else {
-                    Log.e("Error: ", response.message());
+                    Log.e("Response error: ", response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<LatestRatesModel> call, Throwable t) {
                 currencyLatestLiveData.setValue(null);
-                Log.e("Error: ", t.getMessage());
+                Log.e("Failure: ", t.getMessage());
             }
         });
     }
@@ -90,13 +90,14 @@ public class CurrenciesViewModel extends ViewModel {
                     ArrayList<ArrayList<String>> codesList = response.body().getSupportedCodes();
                     currencyCodesLiveData.setValue(codesList);
                 } else {
-                    Log.e("Error: ", response.message());
+                    Log.e("Response error: ", response.message());
                 }
             }
+
             @Override
             public void onFailure(Call<CodeModel> call, Throwable t) {
                 currencyCodesLiveData.setValue(null);
-                Log.e("Error: ", t.getMessage());
+                Log.e("Failure: ", t.getMessage());
             }
         });
     }
@@ -130,7 +131,7 @@ public class CurrenciesViewModel extends ViewModel {
                 } else {
                     flagUrlToLiveData.setValue(null);
                 }
-                Log.e("Error: ", t.getMessage());
+                Log.e("Failure: ", t.getMessage());
             }
         });
     }
